@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Modern workout area">
+  <defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08080a"/><stop offset=".65" stop-color="#18181b"/><stop offset="1" stop-color="#500d0d"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#a)"/>
+  <rect y="640" width="1200" height="260" fill="#08080a"/>
+  <g fill="#18181b" stroke="#71717a" stroke-width="7"><rect x="155" y="510" width="220" height="90" rx="18"/><rect x="475" y="470" width="250" height="120" rx="20"/><rect x="830" y="510" width="210" height="90" rx="18"/></g>
+  <g stroke="#ef4444" stroke-width="12" stroke-linecap="round"><path d="M210 700h780"/><path d="M300 390h600"/></g>
+  <g fill="#ef4444" opacity=".58"><circle cx="280" cy="240" r="70"/><circle cx="610" cy="210" r="95"/><circle cx="920" cy="260" r="62"/></g>
+</svg>

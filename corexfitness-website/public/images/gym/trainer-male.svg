@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200" role="img" aria-label="Professional male gym trainer">
+  <defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08080a"/><stop offset=".55" stop-color="#18181b"/><stop offset="1" stop-color="#5f1111"/></linearGradient></defs>
+  <rect width="1000" height="1200" fill="url(#a)"/>
+  <circle cx="500" cy="285" r="120" fill="#e5e7eb"/>
+  <path d="M210 1100c38-358 150-560 290-560s252 202 290 560" fill="#27272a" stroke="#ef4444" stroke-width="18"/>
+  <g stroke="#d4d4d8" stroke-width="34" stroke-linecap="round"><path d="M330 635 180 810M670 635l150 175"/></g>
+  <g stroke="#ef4444" stroke-width="18" stroke-linecap="round"><path d="M170 810h660"/></g>
+  <circle cx="145" cy="810" r="52" fill="#a1a1aa"/><circle cx="855" cy="810" r="52" fill="#a1a1aa"/>
+</svg>

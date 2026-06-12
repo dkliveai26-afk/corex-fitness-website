@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Luxury gym training floor">
+  <defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0a0a0b"/><stop offset=".6" stop-color="#18181b"/><stop offset="1" stop-color="#4a0c0c"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#a)"/>
+  <path d="M0 640h1200v260H0z" fill="#0b0b0d"/>
+  <path d="M90 640 230 240h740l140 400" fill="#151519" stroke="#3f3f46" stroke-width="8"/>
+  <g stroke="#ef4444" stroke-width="7" opacity=".62"><path d="M240 250h720M205 350h790M170 455h860"/></g>
+  <g fill="#27272a" stroke="#a1a1aa" stroke-width="6"><rect x="140" y="525" width="210" height="92" rx="16"/><rect x="430" y="500" width="330" height="105" rx="18"/><rect x="835" y="522" width="220" height="95" rx="16"/></g>
+  <g fill="#ef4444"><circle cx="210" cy="680" r="34"/><circle cx="990" cy="680" r="34"/><rect x="355" y="670" width="490" height="28" rx="14"/></g>
+</svg>

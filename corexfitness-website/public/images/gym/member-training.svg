@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Members training together">
+  <defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#09090b"/><stop offset=".6" stop-color="#1b1b20"/><stop offset="1" stop-color="#5a1010"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#a)"/>
+  <rect y="650" width="1200" height="250" fill="#08080a"/>
+  <g fill="#e5e7eb"><circle cx="345" cy="300" r="50"/><circle cx="600" cy="265" r="55"/><circle cx="855" cy="310" r="48"/></g>
+  <g stroke="#e5e7eb" stroke-width="28" stroke-linecap="round"><path d="M345 365v205M600 335v240M855 375v190"/><path d="M310 440l-80 95M380 440l85 75M555 420l-115 55M645 420l110 70M820 445l-80 75M890 445l88 90"/></g>
+  <g stroke="#ef4444" stroke-width="13" stroke-linecap="round"><path d="M210 535h790"/></g>
+  <g fill="#71717a"><circle cx="190" cy="535" r="34"/><circle cx="1020" cy="535" r="34"/></g>
+</svg>

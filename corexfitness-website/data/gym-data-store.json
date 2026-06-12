@@ -1,0 +1,318 @@
+{
+  "members": [
+    {
+      "memberId": "CXF-2026-SBJGA",
+      "fullName": "dilkhush kumar",
+      "phoneNumber": "9090930478",
+      "email": "d.klive.ai26@gmail.com",
+      "profileImage": "",
+      "age": 23,
+      "gender": "Male",
+      "selectedPlan": "Standard Plan",
+      "joiningDate": "2026-06-01",
+      "membershipStartDate": "2026-06-01",
+      "membershipEndDate": "2026-08-31",
+      "membershipStatus": "active",
+      "paymentStatus": "pending",
+      "feesAmount": 1999,
+      "notes": "Created from plan booking"
+    }
+  ],
+  "bookings": [
+    {
+      "bookingId": "BOOK-2026-L2CQ4",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "9090930478",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Standard Plan",
+      "bookingDate": "2026-06-01",
+      "bookingTime": "08:57 pm",
+      "bookingStatus": "submitted",
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "feesAmount": 1999
+    },
+    {
+      "bookingId": "BOOK-2026-N8CTP",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "6784905673",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Standard Plan",
+      "bookingDate": "2026-06-01",
+      "bookingTime": "08:50 pm",
+      "bookingStatus": "submitted",
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "feesAmount": 1999
+    },
+    {
+      "bookingId": "BOOK-2026-130MT",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "9090930478",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Standard Plan",
+      "bookingDate": "2026-06-01",
+      "bookingTime": "08:44 pm",
+      "bookingStatus": "submitted",
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "feesAmount": 1999
+    },
+    {
+      "bookingId": "BOOK-2026-6D7GE",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "6784905673",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Standard Plan",
+      "bookingDate": "2026-06-01",
+      "bookingTime": "08:43 pm",
+      "bookingStatus": "submitted",
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "feesAmount": 1999
+    },
+    {
+      "bookingId": "BOOK-2026-72O70",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "7890254676",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Premium Plan",
+      "bookingDate": "2026-06-01",
+      "bookingTime": "08:24 pm",
+      "bookingStatus": "submitted",
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "feesAmount": 3999
+    },
+    {
+      "bookingId": "BOOK-2026-K6N5T",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "+91 8709304727",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Standard Plan",
+      "bookingDate": "2026-06-01",
+      "bookingTime": "08:11 pm",
+      "bookingStatus": "submitted",
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "feesAmount": 1999
+    },
+    {
+      "bookingId": "BOOK-2026-3FVZX",
+      "userName": "deep",
+      "phoneNumber": "6784905673",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Premium Plan",
+      "bookingDate": "2026-05-29",
+      "bookingTime": "09:50 am",
+      "bookingStatus": "completed",
+      "paymentStatus": "pending",
+      "feesAmount": 4999,
+      "paymentMethod": "cash"
+    },
+    {
+      "bookingId": "BOOK-2026-P9Y8N",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "+91 8709304727",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Beginner Plan",
+      "bookingDate": "2026-05-28",
+      "bookingTime": "11:46 pm",
+      "bookingStatus": "submitted",
+      "paymentStatus": "pending",
+      "feesAmount": 999,
+      "paymentMethod": "cash"
+    },
+    {
+      "bookingId": "BOOK-2026-XJ0ZT",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "+91 8709304727",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Standard Plan",
+      "bookingDate": "2026-05-28",
+      "bookingTime": "10:42 pm",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "pending",
+      "feesAmount": 2499,
+      "paymentMethod": "cash"
+    },
+    {
+      "bookingId": "BOOK-2026-O72WQ",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "8709304727",
+      "email": "d.klive.ai26@gmail.com",
+      "selectedPlan": "Standard Plan",
+      "bookingDate": "2026-05-28",
+      "bookingTime": "10:17 pm",
+      "bookingStatus": "confirmed",
+      "paymentStatus": "paid",
+      "feesAmount": 2499,
+      "paymentMethod": "cash"
+    },
+    {
+      "bookingId": "BOOK-2026-JXE1G",
+      "userName": "dilkhush kumar",
+      "phoneNumber": "6784905673",
+      "email": "dilkhush.kumar+@gamil.com",
+      "selectedPlan": "Premium Plan",
+      "bookingDate": "2026-05-28",
+      "bookingTime": "08:55 pm",
+      "bookingStatus": "submitted",
+      "paymentStatus": "pending",
+      "feesAmount": 4999,
+      "paymentMethod": "cash"
+    }
+  ],
+  "payments": [
+    {
+      "paymentId": "PAY-2026-GRUSF",
+      "bookingId": "BOOK-2026-L2CQ4",
+      "memberName": "dilkhush kumar",
+      "amount": 1999,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-06-01",
+      "paymentNumber": "8709304727",
+      "transactionNote": "Pending Cash Payment"
+    },
+    {
+      "paymentId": "PAY-2026-PIHWM",
+      "bookingId": "BOOK-2026-N8CTP",
+      "memberName": "dilkhush kumar",
+      "amount": 1999,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-06-01",
+      "paymentNumber": "8709304727",
+      "transactionNote": "Pending Cash Payment"
+    },
+    {
+      "paymentId": "PAY-2026-70S70",
+      "bookingId": "BOOK-2026-130MT",
+      "memberName": "dilkhush kumar",
+      "amount": 1999,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-06-01",
+      "paymentNumber": "8709304727",
+      "transactionNote": "Pending Cash Payment"
+    },
+    {
+      "paymentId": "PAY-2026-VZI0A",
+      "bookingId": "BOOK-2026-6D7GE",
+      "memberName": "dilkhush kumar",
+      "amount": 1999,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-06-01",
+      "paymentNumber": "8709304727",
+      "transactionNote": "Pending Cash Payment"
+    },
+    {
+      "paymentId": "PAY-2026-W4JXE",
+      "bookingId": "BOOK-2026-72O70",
+      "memberName": "dilkhush kumar",
+      "amount": 3999,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-06-01",
+      "paymentNumber": "8709304727",
+      "transactionNote": "Pending Cash Payment"
+    },
+    {
+      "paymentId": "PAY-2026-QHASW",
+      "bookingId": "BOOK-2026-K6N5T",
+      "memberName": "dilkhush kumar",
+      "amount": 1999,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-06-01",
+      "paymentNumber": "8709304727",
+      "transactionNote": "Pending Cash Payment"
+    },
+    {
+      "paymentId": "PAY-2026-MOJGL",
+      "bookingId": "BOOK-2026-3FVZX",
+      "memberName": "deep",
+      "amount": 4999,
+      "paymentMethod": "not_selected",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-05-29",
+      "paymentNumber": "8709304727"
+    },
+    {
+      "paymentId": "PAY-2026-236KS",
+      "bookingId": "BOOK-2026-P9Y8N",
+      "memberName": "dilkhush kumar",
+      "amount": 999,
+      "paymentMethod": "not_selected",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-05-28",
+      "paymentNumber": "8709304727"
+    },
+    {
+      "paymentId": "PAY-2026-FS22M",
+      "bookingId": "BOOK-2026-XJ0ZT",
+      "memberName": "dilkhush kumar",
+      "amount": 2499,
+      "paymentMethod": "not_selected",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-05-28",
+      "paymentNumber": "8709304727"
+    },
+    {
+      "paymentId": "PAY-2026-S4F0X",
+      "bookingId": "BOOK-2026-O72WQ",
+      "memberName": "dilkhush kumar",
+      "amount": 2499,
+      "paymentMethod": "phonepe",
+      "paymentStatus": "paid",
+      "paymentDate": "2026-05-28",
+      "paymentNumber": "8709304727",
+      "transactionNote": "User marked UPI payment as completed."
+    },
+    {
+      "paymentId": "PAY-2026-5T7YE",
+      "memberName": "dilkhush kumar",
+      "amount": 4999,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "paymentDate": "2026-05-28"
+    }
+  ],
+  "contactLeads": [
+    {
+      "contactDate": "2026-06-01",
+      "email": "dk@exmple.com",
+      "message": "Join request. Email: dk@exmple.com. Joining Date: 2026-06-03. Payment: pay at gym.",
+      "name": "dilkhush kl ",
+      "phone": "9900876767",
+      "subject": "Join Now"
+    },
+    {
+      "email": "dk@exmple.com",
+      "name": "dilkhush kl ",
+      "phone": "9900876767",
+      "subject": "Join Now",
+      "message": "Join request. Email: dk@exmple.com. Joining Date: 2026-06-03. Payment: pay at gym.",
+      "contactDate": "2026-06-01"
+    }
+  ],
+  "whatsAppLeads": [
+    {
+      "userName": "dilkhush kl ",
+      "phoneNumber": "9900876767",
+      "planSelected": "Join Now",
+      "message": "I want to join CORE X FITNESS. I will pay at the gym.",
+      "date": "2026-06-01"
+    },
+    {
+      "userName": "Dilkhush Kumar",
+      "phoneNumber": "8709304727",
+      "planSelected": "Trainer: Maya Kapoor",
+      "message": "thefocusjournalx@gmail.com: lelooo ",
+      "date": "2026-05-28"
+    }
+  ],
+  "gymSheetRows": []
+}

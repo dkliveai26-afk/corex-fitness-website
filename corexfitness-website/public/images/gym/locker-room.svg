@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-label="Clean locker room">
+  <defs><linearGradient id="a" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#08080a"/><stop offset=".55" stop-color="#18181b"/><stop offset="1" stop-color="#431010"/></linearGradient></defs>
+  <rect width="1200" height="900" fill="url(#a)"/>
+  <rect y="680" width="1200" height="220" fill="#09090b"/>
+  <g fill="#18181b" stroke="#71717a" stroke-width="6">
+    <rect x="120" y="160" width="170" height="520" rx="14"/><rect x="320" y="160" width="170" height="520" rx="14"/><rect x="520" y="160" width="170" height="520" rx="14"/><rect x="720" y="160" width="170" height="520" rx="14"/><rect x="920" y="160" width="170" height="520" rx="14"/>
+  </g>
+  <g fill="#ef4444"><circle cx="255" cy="420" r="10"/><circle cx="455" cy="420" r="10"/><circle cx="655" cy="420" r="10"/><circle cx="855" cy="420" r="10"/><circle cx="1055" cy="420" r="10"/></g>
+  <g stroke="#3f3f46" stroke-width="5"><path d="M145 260h120M345 260h120M545 260h120M745 260h120M945 260h120"/></g>
+</svg>
