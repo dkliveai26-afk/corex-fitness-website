@@ -17,7 +17,7 @@ const dietPlans: EditableDietPlan[] = [
     protein: "110g",
     meals: "5",
     image:
-      "https://i.pinimg.com/736x/39/af/91/39af91a3c56b007982e7b6241baca578.jpg"
+      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=90"
   },
   {
     enabled: true,
@@ -86,8 +86,10 @@ const tips = [
 export function DietPage() {
   const { content } = useWebsiteContent();
   const section = content.sections.diet;
-  const activeDietPlans = content.dietPlans.filter((plan) => plan.enabled);
-  const displayedDietPlans = activeDietPlans.length ? activeDietPlans : dietPlans;
+  
+  // Database filter ko bypass karke direct upar wala code use karne ke liye fix:
+  const displayedDietPlans = dietPlans;
+  
   const [selectedPlan, setSelectedPlan] = useState<EditableDietPlan | null>(null);
 
   return (
