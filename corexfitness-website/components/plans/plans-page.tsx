@@ -66,47 +66,6 @@ type Plan = EditablePlan;
 type BookingForm = typeof initialBookingForm;
 type BookingField = keyof BookingForm;
 
-// Sound function ko safe banaya aur call fix kiya
-function forcePlaySound() {
-  try {
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-    if (!AudioContextClass) return;
-
-    const context = new AudioContextClass();
-    
-    const startAudio = () => {
-      const gain = context.createGain();
-      gain.gain.setValueAtTime(0.0001, context.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.42, context.currentTime + 0.025);
-      gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.78);
-      gain.connect(context.destination);
-
-      [523.25, 659.25, 783.99, 1046.5].forEach((frequency, index) => {
-        const oscillator = context.createOscillator();
-        oscillator.type = "triangle";
-        oscillator.frequency.setValueAtTime(frequency, context.currentTime + index * 0.12);
-        oscillator.connect(gain);
-        oscillator.start(context.currentTime + index * 0.12);
-        oscillator.stop(context.currentTime + index * 0.12 + 0.24);
-      });
-
-      window.localStorage.setItem(
-        "power-house-fitness:last-booking-success-sound",
-        JSON.stringify({ playedAt: new Date().toISOString() })
-      );
-      window.setTimeout(() => void context.close(), 1050);
-    };
-
-    if (context.state === "suspended") {
-      void context.resume().then(startAudio);
-    } else {
-      startAudio();
-    }
-  } catch (e) {
-    console.log("Audio blocked or not supported", e);
-  }
-}
-
 export function PlansPage() {
   return (
     <PageShell>
@@ -204,8 +163,28 @@ function PlansPageContent() {
         feesAmount: selectedPlanPrice
       });
       
-      // Sound bajane ke liye custom dynamic call trigger ki
-      forcePlaySound();
+      // Har browser ke liye standard HTML5 Audio trigger kiya bina freeze hue
+      try {
+        const audio = new Audio("/success.mp3");
+        const context = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const gain = context.createGain();
+        gain.gain.setValueAtTime(0.0001, context.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.42, context.currentTime + 0.025);
+        gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.78);
+        gain.connect(context.destination);
+
+        [523.25, 659.25, 783.99, 1046.5].forEach((frequency, index) => {
+          const oscillator = context.createOscillator();
+          oscillator.type = "triangle";
+          oscillator.frequency.setValueAtTime(frequency, context.currentTime + index * 0.12);
+          oscillator.connect(gain);
+          oscillator.start(context.currentTime + index * 0.12);
+          oscillator.stop(context.currentTime + index * 0.12 + 0.24);
+        });
+        audio.play().catch(() => {});
+      } catch (e) {
+        console.log(e);
+      }
       
       void sendBookingConfirmationEmail(result.booking);
       notifyAdmin({
