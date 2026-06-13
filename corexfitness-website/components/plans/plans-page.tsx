@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { FormEvent, useState } from "react";
 import { useFirebaseAuth } from "@/components/auth/auth-provider";
@@ -65,6 +65,47 @@ const initialBookingForm = {
 type Plan = EditablePlan;
 type BookingForm = typeof initialBookingForm;
 type BookingField = keyof BookingForm;
+
+// Sound function ko safe banaya aur call fix kiya
+function forcePlaySound() {
+  try {
+    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContextClass) return;
+
+    const context = new AudioContextClass();
+    
+    const startAudio = () => {
+      const gain = context.createGain();
+      gain.gain.setValueAtTime(0.0001, context.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.42, context.currentTime + 0.025);
+      gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.78);
+      gain.connect(context.destination);
+
+      [523.25, 659.25, 783.99, 1046.5].forEach((frequency, index) => {
+        const oscillator = context.createOscillator();
+        oscillator.type = "triangle";
+        oscillator.frequency.setValueAtTime(frequency, context.currentTime + index * 0.12);
+        oscillator.connect(gain);
+        oscillator.start(context.currentTime + index * 0.12);
+        oscillator.stop(context.currentTime + index * 0.12 + 0.24);
+      });
+
+      window.localStorage.setItem(
+        "power-house-fitness:last-booking-success-sound",
+        JSON.stringify({ playedAt: new Date().toISOString() })
+      );
+      window.setTimeout(() => void context.close(), 1050);
+    };
+
+    if (context.state === "suspended") {
+      void context.resume().then(startAudio);
+    } else {
+      startAudio();
+    }
+  } catch (e) {
+    console.log("Audio blocked or not supported", e);
+  }
+}
 
 export function PlansPage() {
   return (
@@ -162,7 +203,10 @@ function PlansPageContent() {
         selectedPlan: selectedPlan?.name || "Membership Plan",
         feesAmount: selectedPlanPrice
       });
-      void playSuccessSound();
+      
+      // Sound bajane ke liye custom dynamic call trigger ki
+      forcePlaySound();
+      
       void sendBookingConfirmationEmail(result.booking);
       notifyAdmin({
         type: "booking",
@@ -454,47 +498,6 @@ function SummaryItem({ label, value }: { label: string; value: string }) {
   );
 }
 
-function playSuccessSound() {
-  try {
-    const AudioContextClass = window.AudioContext || (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-    if (!AudioContextClass) return;
-
-    const context = new AudioContextClass();
-
-    const play = () => {
-      const gain = context.createGain();
-      gain.gain.setValueAtTime(0.0001, context.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.42, context.currentTime + 0.025);
-      gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.78);
-      gain.connect(context.destination);
-
-      [523.25, 659.25, 783.99, 1046.5].forEach((frequency, index) => {
-        const oscillator = context.createOscillator();
-        oscillator.type = "triangle";
-        oscillator.frequency.setValueAtTime(frequency, context.currentTime + index * 0.12);
-        oscillator.connect(gain);
-        oscillator.start(context.currentTime + index * 0.12);
-        oscillator.stop(context.currentTime + index * 0.12 + 0.24);
-      });
-
-      window.localStorage.setItem(
-        "power-house-fitness:last-booking-success-sound",
-        JSON.stringify({ playedAt: new Date().toISOString() })
-      );
-      window.setTimeout(() => void context.close(), 1050);
-    };
-
-    if (context.state === "suspended") {
-      void context.resume().then(play);
-      return;
-    }
-
-    play();
-  } catch {
-    // Some browsers block audio; booking success should still complete silently.
-  }
-}
-
 async function sendBookingConfirmationEmail(booking: BookingData) {
   if (!booking.email) return;
 
@@ -545,10 +548,3 @@ async function sendBookingConfirmationEmail(booking: BookingData) {
     );
   }
 }
-
-
-
-
-
-
-
