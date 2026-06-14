@@ -1,9 +1,8 @@
+
 "use client";
 
 import { useState } from "react";
-import { saveMember } from "@/lib/gym-management-store";
-import { today, addMonths } from "@/lib/gym-management-store";
-import { getPlanPrice } from "@/lib/gym-management-store";
+import { saveMember, today, addMonths, getPlanPrice } from "@/lib/gym-management-store";
 
 export function PlansPage() {
   const [name, setName] = useState("");
@@ -14,13 +13,13 @@ export function PlansPage() {
   const handleBooking = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !phone) {
-      alert("Please fill all fields");
+      alert("Kripya saari details bharein!");
       return;
     }
 
     const startDate = today();
     
-    // Original system helper function to store data perfectly
+    // Aapke original store me data bhej raha hai
     saveMember({
       fullName: name,
       phoneNumber: phone,
@@ -30,18 +29,18 @@ export function PlansPage() {
       membershipEndDate: addMonths(startDate, 1),
       paymentStatus: "pending",
       feesAmount: getPlanPrice(plan),
-      notes: "Online Booking Submission"
+      notes: "Online Booking"
     });
 
-    // Sound Trigger Loop
+    // Audio bajane ka code
     try {
       const audio = new Audio("/success.mp3");
       audio.play();
     } catch (err) {
-      console.log("Audio target error:", err);
+      console.log("Audio error:", err);
     }
 
-    setMessage("🎉 Booking Registered! Check Dashboard.");
+    setMessage("🎉 Booking Successful!");
     setName("");
     setPhone("");
   };
