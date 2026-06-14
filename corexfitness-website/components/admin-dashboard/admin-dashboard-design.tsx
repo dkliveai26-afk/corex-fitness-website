@@ -4,7 +4,6 @@ import { FormEvent, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ContentManagementPanel } from "@/components/admin-dashboard/content-management";
 
-// Interfaces for structured state management
 interface BookingData {
   id: string;
   name: string;
@@ -22,7 +21,6 @@ export function AdminDashboardDesign() {
   const [bookings, setBookings] = useState<BookingData[]>([]);
   const [search, setSearch] = useState("");
 
-  // Load bookings dynamically from LocalStorage on mount
   useEffect(() => {
     const loadBookings = () => {
       const data = localStorage.getItem("gym_bookings");
@@ -36,12 +34,10 @@ export function AdminDashboardDesign() {
     };
     loadBookings();
     
-    // Listen for storage changes across tabs/actions
     window.addEventListener("storage", loadBookings);
     return () => window.removeEventListener("storage", loadBookings);
   }, []);
 
-  // Handle Permanent Item Deletion
   const handleDelete = (id: string) => {
     if (confirm("Are you sure you want to delete this booking record?")) {
       const updatedBookings = bookings.filter((b) => b.id !== id);
@@ -50,7 +46,6 @@ export function AdminDashboardDesign() {
     }
   };
 
-  // Filter functionality for real-time lookups
   const filteredBookings = useMemo(() => {
     const query = search.trim().toLowerCase();
     if (!query) return bookings;
@@ -185,10 +180,3 @@ export function AdminDashboardDesign() {
     </main>
   );
 }
-onClick={(event) => { 
-  event.stopPropagation(); 
-  if(confirm("Delete karein?")) {
-    deleteMember(member.memberId);
-    window.location.reload(); // Is se delete hote hi page automatic refresh ho jayega aur glitch nahi hoga
-  }
-}}
