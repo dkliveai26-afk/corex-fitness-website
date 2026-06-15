@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { ContentManagementPanel } from "@/components/admin-dashboard/content-management";
 import { emptyGymDataStore, type BookingStatus, type GymDataStore, type MemberData, type PaymentStatus } from "@/lib/gym-data-models";
 import {
@@ -78,6 +79,10 @@ export function AdminDashboardDesign() {
                   <span className="block h-0.5 w-5 rounded-full bg-current" />
                 </span>
               </button>
+
+              <Link aria-label="CORE X FITNESS home" className="flex shrink-0 items-center" href="/">
+                <img alt="CORE X FITNESS logo" className="h-12 w-44 object-contain object-left sm:h-14 sm:w-56" src="/images/navbar-logo-fit.png" />
+              </Link>
 
               <div className="min-w-0 flex-1" aria-hidden="true" />
 
@@ -706,7 +711,10 @@ function BookingCard({ booking, store }: { booking: GymDataStore["bookings"][num
         <p className="text-sm font-black text-white">{booking.userName}</p>
         <p className="mt-1 break-words text-xs text-zinc-500">{contact.phoneNumber} | {contact.email}</p>
       </div>
-      <p className="text-sm font-bold text-zinc-300">{booking.selectedPlan}</p>
+      <div className="min-w-0">
+        <p className="text-sm font-bold text-zinc-300">{booking.selectedPlan}</p>
+        <p className="mt-1 text-xs font-black text-red-200">Amount: {formatCurrency(contact.feesAmount)}</p>
+      </div>
       <p className="text-sm font-bold text-zinc-400">{formatGymDate(booking.bookingDate)} {booking.bookingTime || ""}</p>
       <div className="min-w-0">
         <p className="text-sm font-black text-red-200">{formatBookingPaymentStatus(contact.paymentStatus, contact.paymentMethod)}</p>
