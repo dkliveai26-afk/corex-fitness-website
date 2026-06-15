@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useState } from "react";
-import { ContentManagementPanel } from "@/components/admin-dashboard/content-management";
 import { emptyGymDataStore, type BookingStatus, type GymDataStore, type MemberData, type PaymentStatus } from "@/lib/gym-data-models";
 import {
   addMonths,
@@ -20,9 +19,9 @@ import {
   updateBookingStatus
 } from "@/lib/gym-management-store";
 
-const sidebarItems = ["Dashboard", "Members", "Bookings", "Payments", "Revenue", "Notifications", "Settings", "Content"] as const;
+const sidebarItems = ["Dashboard", "Members", "Bookings", "Payments", "Revenue", "Notifications", "Settings"] as const;
 const planOptions = ["Beginner Plan", "Standard Plan", "Premium Plan"];
-const paymentOptions: PaymentStatus[] = ["paid", "unpaid", "pending", "cash_on_gym"];
+const paymentOptions: PaymentStatus[] = ["paid", "unpaid", "pending"];
 const bookingStatusOptions: BookingStatus[] = ["submitted", "confirmed", "cancelled", "completed"];
 type AdminSection = (typeof sidebarItems)[number];
 
@@ -60,6 +59,7 @@ export function AdminDashboardDesign() {
     <main className="min-h-screen overflow-x-hidden scroll-smooth bg-[#070707] text-white">
       <div className="flex min-h-screen">
         <aside className="hidden w-72 shrink-0 border-r border-white/10 bg-black/80 p-6 xl:block">
+          <AdminBrand />
           <AdminNav activeSection={activeSection} onSelect={setActiveSection} />
         </aside>
 
@@ -79,7 +79,13 @@ export function AdminDashboardDesign() {
                 </span>
               </button>
 
-              <div className="min-w-0 flex-1" aria-hidden="true" />
+              <div className="box-border flex h-12 min-w-0 flex-1 items-center justify-center overflow-hidden sm:h-20">
+                <img
+                  alt="CORE X FITNESS logo"
+                  className="h-10 w-[12rem] scale-[2.1] object-contain object-center sm:h-20 sm:w-[26rem] sm:scale-[3.2]"
+                  src="/images/navbar-transparent-logo.png"
+                />
+              </div>
 
               <div className="flex shrink-0 items-center gap-2 sm:gap-3">
                 <button aria-label="Admin notifications" className="grid size-10 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-red-300 transition hover:border-red-400 hover:bg-red-600 hover:text-white sm:size-11" onClick={() => setActiveSection("Notifications")} type="button">
@@ -115,7 +121,8 @@ export function AdminDashboardDesign() {
       {isMenuOpen ? (
         <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm xl:hidden" onClick={() => setIsMenuOpen(false)}>
           <aside className="h-full w-[min(86vw,20rem)] border-r border-white/10 bg-zinc-950 p-5 shadow-card" onClick={(event) => event.stopPropagation()}>
-            <div className="flex items-center justify-end gap-4">
+            <div className="flex items-center justify-between gap-4">
+              <AdminBrand />
               <button aria-label="Close admin menu" className="grid size-10 place-items-center rounded-full border border-white/10 bg-white/[0.06] text-xl font-bold transition hover:bg-red-600" onClick={() => setIsMenuOpen(false)} type="button">
                 x
               </button>
@@ -147,6 +154,18 @@ export function AdminDashboardDesign() {
   );
 }
 
+function AdminBrand() {
+  return (
+    <div className="flex items-center">
+      <img
+        alt="CORE X FITNESS logo"
+        className="h-14 w-44 shrink-0 object-contain object-left"
+        src="/images/navbar-transparent-logo.png"
+      />
+    </div>
+  );
+}
+
 function AdminNav({
   activeSection,
   compact = false,
@@ -157,7 +176,7 @@ function AdminNav({
   onSelect: (section: AdminSection) => void;
 }) {
   return (
-    <nav className={compact ? "mt-8 grid gap-2" : "grid gap-2"}>
+    <nav className={compact ? "mt-8 grid gap-2" : "mt-10 grid gap-2"}>
       {sidebarItems.map((item) => (
         <button
           className={`rounded-2xl border px-4 py-3 text-left text-sm font-black uppercase tracking-wide transition ${
@@ -227,10 +246,6 @@ function AdminSectionView({
 
   if (activeSection === "Settings") {
     return <SettingsSection store={store} />;
-  }
-
-  if (activeSection === "Content") {
-    return <ContentManagementPanel />;
   }
 
   return (
@@ -494,7 +509,7 @@ function SheetSelect({
     >
       {options.map((option) => (
         <option key={option} value={option}>
-          {formatSelectOption(option)}
+          {option}
         </option>
       ))}
     </select>
@@ -554,7 +569,7 @@ function MembersManagement({
               >
                 {paymentOptions.map((status) => (
                   <option key={status} value={status}>
-                    {formatPaymentStatus(status)}
+                    {status}
                   </option>
                 ))}
               </select>
@@ -594,7 +609,7 @@ function MembersManagement({
               >
                 {paymentOptions.map((status) => (
                   <option key={status} value={status}>
-                    {formatPaymentStatus(status)}
+                    {status}
                   </option>
                 ))}
               </select>
@@ -628,7 +643,7 @@ function MemberAvatar({ member }: { member: MemberData }) {
 
 function QuickPaymentActions({ member }: { member: MemberData }) {
   return (
-    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+    <div className="grid grid-cols-3 gap-2">
       {paymentOptions.map((status) => (
         <button
           className={`rounded-full px-3 py-2 text-[10px] font-black uppercase tracking-wide transition ${
@@ -645,7 +660,7 @@ function QuickPaymentActions({ member }: { member: MemberData }) {
           }
           type="button"
         >
-          {formatPaymentStatus(status)}
+          {status}
         </button>
       ))}
     </div>
@@ -708,10 +723,7 @@ function BookingCard({ booking, store }: { booking: GymDataStore["bookings"][num
       </div>
       <p className="text-sm font-bold text-zinc-300">{booking.selectedPlan}</p>
       <p className="text-sm font-bold text-zinc-400">{formatGymDate(booking.bookingDate)} {booking.bookingTime || ""}</p>
-      <div className="min-w-0">
-        <p className="text-sm font-black text-red-200">{formatBookingPaymentStatus(contact.paymentStatus, contact.paymentMethod)}</p>
-        <p className="mt-1 text-xs font-bold uppercase tracking-wide text-zinc-500">{formatPaymentMethod(contact.paymentMethod)}</p>
-      </div>
+      <p className="text-sm font-black capitalize text-red-200">{contact.paymentStatus}</p>
       <select
         className="w-fit rounded-full border border-red-500/35 bg-red-600/10 px-3 py-2 text-xs font-black uppercase tracking-wide text-red-200 outline-none"
         onChange={(event) => updateBookingStatus(booking.bookingId, event.target.value as BookingStatus)}
@@ -755,7 +767,7 @@ function PaymentSection({ store }: { store: GymDataStore }) {
       <div className="mt-5 grid gap-2 text-sm text-zinc-300">
         {store.payments.length ? store.payments.map((payment) => (
           <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3" key={payment.paymentId}>
-            {payment.memberName} - {formatCurrency(payment.amount)} - {formatPaymentMethod(payment.paymentMethod)} - <span className="text-red-200">{formatBookingPaymentStatus(payment.paymentStatus, payment.paymentMethod)}</span> - {formatGymDate(payment.paymentDate)}
+            {payment.memberName} - {formatCurrency(payment.amount)} - <span className="capitalize text-red-200">{payment.paymentStatus}</span> - {formatGymDate(payment.paymentDate)}
           </p>
         )) : <p className="rounded-xl border border-white/10 bg-white/[0.04] p-3">No payment history yet.</p>}
       </div>
@@ -815,7 +827,7 @@ function MobileBottomNav({
     { icon: "booking", label: "Booking", section: "Bookings" },
     { icon: "payments", label: "Pay", section: "Payments" }
   ];
-  const moreItems: AdminSection[] = ["Revenue", "Notifications", "Settings", "Content"];
+  const moreItems: AdminSection[] = ["Revenue", "Notifications", "Settings"];
   const isMoreActive = moreItems.includes(activeSection);
 
   return (
@@ -1075,6 +1087,29 @@ function SettingsSection({ store }: { store: GymDataStore }) {
   );
 }
 
+function MemberActivity({ store }: { store: GymDataStore }) {
+  const activity = [
+    ...store.members.slice(0, 2).map((member) => `${member.fullName} joined gym`),
+    ...store.bookings.slice(0, 2).map((booking) => `${booking.userName} booking submitted`),
+    ...store.payments.slice(0, 2).map((payment) => `${payment.memberName} payment ${payment.paymentStatus}`)
+  ];
+
+  return (
+    <section className="rounded-[2rem] border border-white/10 bg-[#111217]/95 p-5 shadow-card sm:p-6">
+      <p className="text-xs font-black uppercase tracking-[0.22em] text-red-400">Member Activity</p>
+      <h2 className="mt-2 text-2xl font-black">Recent gym activity</h2>
+      <div className="mt-5 grid gap-3 md:grid-cols-3">
+        {activity.map((item, index) => (
+          <article className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 transition hover:-translate-y-1 hover:border-red-500/50" key={`${item}-${index}`}>
+            <p className="font-black">{item}</p>
+            <p className="mt-2 text-sm text-zinc-500">Synced from gym records</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function MemberEditor({ member, onClose }: { member: MemberData; onClose: () => void }) {
   const [selectedPlan, setSelectedPlan] = useState(member.selectedPlan);
   const [startDate, setStartDate] = useState(member.membershipStartDate);
@@ -1148,7 +1183,7 @@ function MemberEditor({ member, onClose }: { member: MemberData; onClose: () => 
           <select className="contact-input" name="selectedPlan" onChange={(event) => updatePlan(event.target.value)} value={selectedPlan}>{planOptions.map((plan) => <option key={plan}>{plan}</option>)}</select>
           <input className="contact-input" name="membershipStartDate" onChange={(event) => updateStartDate(event.target.value)} type="date" value={startDate} required />
           <input className="contact-input" name="membershipEndDate" onChange={(event) => setEndDate(event.target.value)} type="date" value={endDate} required />
-          <select className="contact-input" defaultValue={member.paymentStatus} name="paymentStatus">{paymentOptions.map((status) => <option key={status} value={status}>{formatPaymentStatus(status)}</option>)}</select>
+          <select className="contact-input" defaultValue={member.paymentStatus} name="paymentStatus">{paymentOptions.map((status) => <option key={status}>{status}</option>)}</select>
           <input className="contact-input" name="feesAmount" onChange={(event) => setFeesAmount(event.target.value)} placeholder="Fees amount" type="number" value={feesAmount} />
           <textarea className="contact-input min-h-24 resize-y sm:col-span-2" defaultValue={member.notes || ""} name="notes" placeholder="Notes" />
         </div>
@@ -1210,7 +1245,7 @@ function RenewMemberModal({ member, onClose }: { member: MemberData; onClose: ()
             {planOptions.map((plan) => <option key={plan}>{plan}</option>)}
           </select>
           <select className="contact-input" defaultValue="pending" name="paymentStatus">
-            {paymentOptions.map((status) => <option key={status} value={status}>{formatPaymentStatus(status)}</option>)}
+            {paymentOptions.map((status) => <option key={status}>{status}</option>)}
           </select>
           <input className="contact-input" onChange={(event) => updateStartDate(event.target.value)} type="date" value={startDate} />
           <input className="contact-input" onChange={(event) => setEndDate(event.target.value)} type="date" value={endDate} />
@@ -1269,13 +1304,11 @@ function getBookingContact(booking: GymDataStore["bookings"][number], store: Gym
   const linkedMember =
     store.members.find((member) => member.fullName === booking.userName && member.selectedPlan === booking.selectedPlan) ||
     store.members.find((member) => member.fullName === booking.userName);
-  const linkedPayment = store.payments.find((payment) => payment.bookingId === booking.bookingId);
 
   return {
     email: booking.email || linkedMember?.email || "Not saved",
     feesAmount: booking.feesAmount ?? linkedMember?.feesAmount ?? getPlanPrice(booking.selectedPlan),
-    paymentMethod: booking.paymentMethod || linkedPayment?.paymentMethod || "cash",
-    paymentStatus: booking.paymentStatus || linkedPayment?.paymentStatus || linkedMember?.paymentStatus || "pending",
+    paymentStatus: booking.paymentStatus || linkedMember?.paymentStatus || "pending",
     phoneNumber: booking.phoneNumber || linkedMember?.phoneNumber || "Not saved"
   };
 }
@@ -1373,7 +1406,7 @@ function exportPayments(payments: GymDataStore["payments"]) {
 function exportBookings(store: GymDataStore) {
   saveInternalExport(
     "core-x-fitness-bookings.csv",
-    ["Booking ID", "User Name", "Phone", "Email", "Selected Plan", "Booking Date", "Booking Time", "Payment Method", "Payment Status", "Status"],
+    ["Booking ID", "User Name", "Phone", "Email", "Selected Plan", "Booking Date", "Booking Time", "Payment Status", "Status"],
     store.bookings.map((booking) => {
       const contact = getBookingContact(booking, store);
       return [
@@ -1384,8 +1417,7 @@ function exportBookings(store: GymDataStore) {
         booking.selectedPlan,
         booking.bookingDate,
         booking.bookingTime || "",
-        formatPaymentMethod(contact.paymentMethod),
-        formatBookingPaymentStatus(contact.paymentStatus, contact.paymentMethod),
+        contact.paymentStatus,
         booking.bookingStatus
       ];
     })
@@ -1406,34 +1438,6 @@ function saveInternalExport(fileName: string, headers: string[], rows: string[][
   );
 }
 
-function formatPaymentStatus(status: PaymentStatus | string) {
-  if (status === "cash_on_gym") return "Cash on Gym";
-  return status.charAt(0).toUpperCase() + status.slice(1);
-}
-
-function formatPaymentMethod(method?: string) {
-  if (method === "cash") return "Cash on Gym";
-  if (method === "google_pay") return "Google Pay";
-  if (method === "phonepe") return "PhonePe";
-  if (method === "paytm") return "Paytm";
-  if (method === "upi") return "UPI";
-  if (method === "card") return "Card";
-  if (method === "bank_transfer") return "Bank Transfer";
-  return "Not Selected";
-}
-
-function formatBookingPaymentStatus(status: PaymentStatus | string, method?: string) {
-  if ((method === "cash" && status === "pending") || status === "cash_on_gym") {
-    return "Pending Cash Payment";
-  }
-
-  return formatPaymentStatus(status);
-}
-
-function formatSelectOption(option: string) {
-  return paymentOptions.includes(option as PaymentStatus) ? formatPaymentStatus(option) : option;
-}
-
 function BellIcon() {
   return (
     <svg aria-hidden="true" className="size-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -1442,3 +1446,4 @@ function BellIcon() {
     </svg>
   );
 }
+
