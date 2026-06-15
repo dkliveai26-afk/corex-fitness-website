@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
 
 interface Plan {
   name: string;
@@ -55,7 +54,6 @@ export function PlansPage() {
 
   const handleSelectPlan = (planName: string) => {
     setLoading(planName);
-    // Simple mock booking simulation for local handling
     setTimeout(() => {
       const existingBookings = JSON.parse(localStorage.getItem("gym_bookings") || "[]");
       const newBooking = {
@@ -67,7 +65,6 @@ export function PlansPage() {
       };
       localStorage.setItem("gym_bookings", JSON.stringify([...existingBookings, newBooking]));
       
-      // Play system success audio if available
       const audio = new Audio("/success.mp3");
       audio.play().catch(() => {});
       
@@ -100,7 +97,7 @@ export function PlansPage() {
               <ul className="mt-8 grid gap-4 border-t border-white/5 pt-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3 text-sm text-zinc-300">
-                    <Check className="h-4 w-4 shrink-0 text-red-500" />
+                    <span className="h-4 w-4 shrink-0 text-red-500 font-bold">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
