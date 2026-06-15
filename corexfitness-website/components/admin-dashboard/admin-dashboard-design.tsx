@@ -79,12 +79,9 @@ export function AdminDashboardDesign() {
                 </span>
               </button>
 
-              <div className="box-border flex h-12 min-w-0 flex-1 items-center justify-center overflow-hidden sm:h-20">
-                <img
-                  alt="CORE X FITNESS logo"
-                  className="h-10 w-[12rem] scale-[2.1] object-contain object-center sm:h-20 sm:w-[26rem] sm:scale-[3.2]"
-                  src="/images/navbar-transparent-logo.png"
-                />
+              <div className="min-w-0">
+                <p className="text-[10px] font-black uppercase tracking-[0.18em] text-red-400 sm:text-xs sm:tracking-[0.22em]">Owner Panel</p>
+                <h1 className="mt-1 truncate text-base font-black sm:text-2xl">Power House Fitness Admin</h1>
               </div>
 
               <div className="flex shrink-0 items-center gap-2 sm:gap-3">
@@ -156,12 +153,12 @@ export function AdminDashboardDesign() {
 
 function AdminBrand() {
   return (
-    <div className="flex items-center">
-      <img
-        alt="CORE X FITNESS logo"
-        className="h-14 w-44 shrink-0 object-contain object-left"
-        src="/images/navbar-transparent-logo.png"
-      />
+    <div className="flex items-center gap-3">
+      <span className="grid size-11 place-items-center rounded-md bg-red-600 text-sm font-black shadow-red">PH</span>
+      <div className="min-w-0">
+        <p className="truncate text-sm font-black uppercase tracking-wide">Power House</p>
+        <p className="text-xs font-bold text-zinc-500">Admin Dashboard</p>
+      </div>
     </div>
   );
 }
@@ -821,11 +818,11 @@ function MobileBottomNav({
   onSelect: (section: AdminSection) => void;
   onToggleMore: () => void;
 }) {
-  const mobileItems: { icon: "dashboard" | "members" | "booking" | "payments"; label: string; section: AdminSection }[] = [
-    { icon: "dashboard", label: "Dash", section: "Dashboard" },
-    { icon: "members", label: "Members", section: "Members" },
-    { icon: "booking", label: "Booking", section: "Bookings" },
-    { icon: "payments", label: "Pay", section: "Payments" }
+  const mobileItems: { label: string; section: AdminSection }[] = [
+    { label: "Dash", section: "Dashboard" },
+    { label: "Members", section: "Members" },
+    { label: "Booking", section: "Bookings" },
+    { label: "Pay", section: "Payments" }
   ];
   const moreItems: AdminSection[] = ["Revenue", "Notifications", "Settings"];
   const isMoreActive = moreItems.includes(activeSection);
@@ -850,99 +847,32 @@ function MobileBottomNav({
           </div>
         </div>
       ) : null}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 box-border grid w-full max-w-full grid-cols-[repeat(5,minmax(0,1fr))] overflow-x-hidden border-t border-white/10 bg-black/90 px-0.5 py-0.5 pb-[calc(0.125rem+env(safe-area-inset-bottom))] backdrop-blur-xl sm:py-1 xl:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-40 flex max-w-full gap-1 overflow-x-auto border-t border-white/10 bg-black/90 px-2 py-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))] backdrop-blur-xl xl:hidden">
         {mobileItems.map((item) => (
           <button
             aria-label={item.section}
-            className={`box-border flex min-w-0 overflow-hidden flex-col items-center justify-center gap-px rounded-md p-[2px] text-center text-[clamp(6px,2.1vw,8px)] font-black uppercase leading-none tracking-normal transition sm:p-[3px] sm:text-[clamp(6.5px,2.25vw,9px)] ${
+            className={`min-w-[3.35rem] flex-1 rounded-2xl px-1.5 py-2 text-center text-[8.5px] font-black uppercase leading-none tracking-normal transition min-[375px]:text-[9.5px] min-[414px]:text-[10px] ${
               item.section === activeSection ? "bg-red-600 text-white shadow-red" : "bg-white/[0.05] text-zinc-300"
             }`}
             key={item.section}
             onClick={() => onSelect(item.section)}
             type="button"
           >
-            <AdminBottomNavIcon name={item.icon} />
-            <span className="block max-w-full truncate whitespace-nowrap">{item.label}</span>
+            {item.label}
           </button>
         ))}
         <button
           aria-label="More admin sections"
-          className={`box-border flex min-w-0 overflow-hidden flex-col items-center justify-center gap-px rounded-md p-[2px] text-center text-[clamp(6px,2.1vw,8px)] font-black uppercase leading-none tracking-normal transition sm:p-[3px] sm:text-[clamp(6.5px,2.25vw,9px)] ${
+          className={`min-w-[3.35rem] flex-1 rounded-2xl px-1.5 py-2 text-center text-[8.5px] font-black uppercase leading-none tracking-normal transition min-[375px]:text-[9.5px] min-[414px]:text-[10px] ${
             isMoreActive || isMoreOpen ? "bg-red-600 text-white shadow-red" : "bg-white/[0.05] text-zinc-300"
           }`}
           onClick={onToggleMore}
           type="button"
         >
-          <AdminBottomNavIcon name="more" />
-          <span className="block max-w-full truncate whitespace-nowrap">More</span>
+          More
         </button>
       </nav>
     </>
-  );
-}
-
-function AdminBottomNavIcon({ name }: { name: "dashboard" | "members" | "booking" | "payments" | "more" }) {
-  const commonProps = {
-    "aria-hidden": true,
-    className: "size-[clamp(12px,3.7vw,15px)] shrink-0 sm:size-[clamp(13px,4vw,17px)]",
-    fill: "none",
-    stroke: "currentColor",
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    strokeWidth: "2",
-    viewBox: "0 0 24 24"
-  };
-
-  if (name === "dashboard") {
-    return (
-      <svg {...commonProps}>
-        <path d="m3 11 9-8 9 8" />
-        <path d="M5 10v10h14V10" />
-        <path d="M9 20v-6h6v6" />
-      </svg>
-    );
-  }
-
-  if (name === "members") {
-    return (
-      <svg {...commonProps}>
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    );
-  }
-
-  if (name === "booking") {
-    return (
-      <svg {...commonProps}>
-        <path d="M8 2v4" />
-        <path d="M16 2v4" />
-        <rect height="18" rx="2" width="18" x="3" y="4" />
-        <path d="M3 10h18" />
-        <path d="m9 16 2 2 4-4" />
-      </svg>
-    );
-  }
-
-  if (name === "payments") {
-    return (
-      <svg {...commonProps}>
-        <rect height="14" rx="2" width="20" x="2" y="5" />
-        <path d="M2 10h20" />
-        <path d="M6 15h3" />
-        <path d="M17 15h1" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg {...commonProps}>
-      <path d="M4 12h16" />
-      <path d="M4 6h16" />
-      <path d="M4 18h16" />
-    </svg>
   );
 }
 
@@ -1367,14 +1297,14 @@ function readProfileImage(file: File | undefined, onLoad: (value: string) => voi
 function buildMemberWhatsAppHref(member: MemberData) {
   const digits = member.phoneNumber.replace(/\D/g, "");
   const phone = digits.length === 10 ? `91${digits}` : digits;
-  const message = `Hello ${member.fullName}, this is CORE X FITNESS regarding your ${member.selectedPlan} membership.`;
+  const message = `Hello ${member.fullName}, this is Power House Fitness regarding your ${member.selectedPlan} membership.`;
 
   return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 }
 
 function exportMembers(members: MemberData[]) {
   saveInternalExport(
-    "core-x-fitness-members.csv",
+    "power-house-members.csv",
     ["First Name", "Phone Number", "Email", "Selected Plan", "Join Date", "Membership End Date", "Payment Status"],
     members.map((member) => [
       member.fullName,
@@ -1390,7 +1320,7 @@ function exportMembers(members: MemberData[]) {
 
 function exportPayments(payments: GymDataStore["payments"]) {
   saveInternalExport(
-    "core-x-fitness-payments.csv",
+    "power-house-payments.csv",
     ["Payment ID", "Member Name", "Amount", "Method", "Status", "Payment Date"],
     payments.map((payment) => [
       payment.paymentId,
@@ -1405,7 +1335,7 @@ function exportPayments(payments: GymDataStore["payments"]) {
 
 function exportBookings(store: GymDataStore) {
   saveInternalExport(
-    "core-x-fitness-bookings.csv",
+    "power-house-bookings.csv",
     ["Booking ID", "User Name", "Phone", "Email", "Selected Plan", "Booking Date", "Booking Time", "Payment Status", "Status"],
     store.bookings.map((booking) => {
       const contact = getBookingContact(booking, store);
@@ -1428,7 +1358,7 @@ function saveInternalExport(fileName: string, headers: string[], rows: string[][
   if (typeof window === "undefined") return;
 
   window.localStorage.setItem(
-    "core-x-fitness:last-export",
+    "power-house-fitness:last-export",
     JSON.stringify({
       fileName,
       headers,
@@ -1446,4 +1376,3 @@ function BellIcon() {
     </svg>
   );
 }
-
