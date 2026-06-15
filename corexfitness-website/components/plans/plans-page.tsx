@@ -1,64 +1,122 @@
-
 "use client";
 
 import { useState } from "react";
-import { saveMember, today, addMonths, getPlanPrice } from "@/lib/gym-management-store";
+import { Check } from "lucide-react";
+
+interface Plan {
+  name: string;
+  price: string;
+  duration: string;
+  features: string[];
+  color: string;
+}
+
+const plans: Plan[] = [
+  {
+    name: "Monthly",
+    price: "₹1,500",
+    duration: "Per Month",
+    color: "from-zinc-900 to-zinc-800",
+    features: [
+      "Access to gym floor",
+      "Standard equipment",
+      "Locker room access",
+      "Free WiFi",
+    ],
+  },
+  {
+    name: "Quarterly",
+    price: "₹4,000",
+    duration: "3 Months",
+    color: "from-red-950/40 to-red-900/20 border-red-500/30",
+    features: [
+      "Everything in Monthly",
+      "1 Personal training session",
+      "Diet consultation",
+      "Body composition analysis",
+    ],
+  },
+  {
+    name: "Annual",
+    price: "₹12,000",
+    duration: "12 Months",
+    color: "from-zinc-900 to-zinc-800",
+    features: [
+      "Everything in Quarterly",
+      "Unrestricted access",
+      "Free gym merchandise",
+      "Priority support",
+    ],
+  },
+];
 
 export function PlansPage() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [plan, setPlan] = useState("Beginner Plan");
-  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState<string | null>(null);
 
-  const handleBooking = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name || !phone) {
-      alert("Kripya saari details bharein!");
-      return;
-    }
-
-    const startDate = today();
-    
-    // Aapke original store me data bhej raha hai
-    saveMember({
-      fullName: name,
-      phoneNumber: phone,
-      email: `${name.toLowerCase().replace(/\s+/g, "")}@corex.com`,
-      selectedPlan: plan,
-      membershipStartDate: startDate,
-      membershipEndDate: addMonths(startDate, 1),
-      paymentStatus: "pending",
-      feesAmount: getPlanPrice(plan),
-      notes: "Online Booking"
-    });
-
-    // Audio bajane ka code
-    try {
+  const handleSelectPlan = (planName: string) => {
+    setLoading(planName);
+    // Simple mock booking simulation for local handling
+    setTimeout(() => {
+      const existingBookings = JSON.parse(localStorage.getItem("gym_bookings") || "[]");
+      const newBooking = {
+        id: Math.random().toString(36).substr(2, 9),
+        name: "Regular Gym Member",
+        phone: "9999999999",
+        plan: planName,
+        date: new Date().toLocaleDateString(),
+      };
+      localStorage.setItem("gym_bookings", JSON.stringify([...existingBookings, newBooking]));
+      
+      // Play system success audio if available
       const audio = new Audio("/success.mp3");
-      audio.play();
-    } catch (err) {
-      console.log("Audio error:", err);
-    }
-
-    setMessage("🎉 Booking Successful!");
-    setName("");
-    setPhone("");
+      audio.play().catch(() => {});
+      
+      alert(`Successfully booked ${planName} plan!`);
+      setLoading(null);
+    }, 1000);
   };
 
   return (
-    <div style={{ padding: "40px", maxWidth: "500px", margin: "40px auto", color: "#fff", background: "#111217", borderRadius: "16px", border: "1px solid rgba(255,255,255,0.1)" }}>
-      <h2 style={{ textAlign: "center", color: "#ef4444", fontWeight: "900", textTransform: "uppercase" }}>Book Your Gym Plan</h2>
-      {message && <p style={{ color: "#4ade80", textAlign: "center", fontWeight: "bold" }}>{message}</p>}
-      <form onSubmit={handleBooking} style={{ display: "flex", flexDirection: "column", gap: "20px", marginTop: "20px" }}>
-        <input type="text" value={name} onChange={(e) => setName(e.target.value)} style={{ padding: "12px", borderRadius: "8px", background: "#000", color: "#fff", border: "1px solid #333" }} placeholder="Full Name" />
-        <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} style={{ padding: "12px", borderRadius: "8px", background: "#000", color: "#fff", border: "1px solid #333" }} placeholder="Phone Number" />
-        <select value={plan} onChange={(e) => setPlan(e.target.value)} style={{ padding: "12px", borderRadius: "8px", background: "#000", color: "#fff", border: "1px solid #333" }}>
-          <option value="Beginner Plan">Beginner Plan</option>
-          <option value="Standard Plan">Standard Plan</option>
-          <option value="Premium Plan">Premium Plan</option>
-        </select>
-        <button type="submit" style={{ padding: "14px", background: "#dc2626", color: "#fff", borderRadius: "9999px", fontWeight: "900", cursor: "pointer" }}>Confirm Booking</button>
-      </form>
+    <div className="min-h-screen bg-[#070707] py-20 text-white">
+      <div className="mx-auto w-[min(1200px,calc(100%-48px))]">
+        <div className="text-center">
+          <p className="text-xs font-black uppercase tracking-widest text-red-500">Membership</p>
+          <h1 className="mt-2 text-4xl font-black tracking-tight sm:text-5xl">CHOOSE YOUR PLAN</h1>
+          <p className="mt-4 text-zinc-400">Select the perfect membership structure for your fitness journey.</p>
+        </div>
+
+        <div className="mt-16 grid gap-8 md:grid-cols-3">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`rounded-3xl border border-white/10 bg-gradient-to-b p-8 shadow-2xl ${plan.color}`}
+            >
+              <h3 className="text-xl font-black uppercase tracking-wide">{plan.name}</h3>
+              <div className="mt-4 flex items-baseline gap-1">
+                <span className="text-4xl font-black tracking-tight">{plan.price}</span>
+                <span className="text-sm text-zinc-400">/ {plan.duration}</span>
+              </div>
+
+              <ul className="mt-8 grid gap-4 border-t border-white/5 pt-8">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-center gap-3 text-sm text-zinc-300">
+                    <Check className="h-4 w-4 shrink-0 text-red-500" />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <button
+                onClick={() => handleSelectPlan(plan.name)}
+                disabled={loading !== null}
+                className="mt-8 w-full rounded-2xl bg-white py-4 text-center text-sm font-black uppercase tracking-wider text-black transition hover:bg-red-500 hover:text-white disabled:opacity-50"
+              >
+                {loading === plan.name ? "Processing..." : "Select Plan"}
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
