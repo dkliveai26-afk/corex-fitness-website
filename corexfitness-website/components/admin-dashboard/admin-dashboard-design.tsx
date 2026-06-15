@@ -16,7 +16,6 @@ const sidebarItems = ["Dashboard", "Bookings", "Content"] as const;
 type AdminSection = (typeof sidebarItems)[number];
 
 export function AdminDashboardDesign() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<AdminSection>("Dashboard");
   const [bookings, setBookings] = useState<BookingData[]>([]);
   const [search, setSearch] = useState("");
