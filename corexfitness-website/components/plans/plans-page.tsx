@@ -55,20 +55,7 @@ export function PlansPage() {
   const handleSelectPlan = (planName: string) => {
     setLoading(planName);
     setTimeout(() => {
-      const existingBookings = JSON.parse(localStorage.getItem("gym_bookings") || "[]");
-      const newBooking = {
-        id: Math.random().toString(36).substr(2, 9),
-        name: "Regular Gym Member",
-        phone: "9999999999",
-        plan: planName,
-        date: new Date().toLocaleDateString(),
-      };
-      localStorage.setItem("gym_bookings", JSON.stringify([...existingBookings, newBooking]));
-      
-      const audio = new Audio("/success.mp3");
-      audio.play().catch(() => {});
-      
-      alert(`Successfully booked ${planName} plan!`);
+      alert(`Successfully selected ${planName} plan!`);
       setLoading(null);
     }, 1000);
   };
@@ -97,7 +84,7 @@ export function PlansPage() {
               <ul className="mt-8 grid gap-4 border-t border-white/5 pt-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-center gap-3 text-sm text-zinc-300">
-                    <span className="h-4 w-4 shrink-0 text-red-500 font-bold">✓</span>
+                    <span className="text-red-500 font-bold">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}
